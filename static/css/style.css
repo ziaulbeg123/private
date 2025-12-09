@@ -1,0 +1,19 @@
+/* Custom styles for realism */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    background-image: url('../images/hero.jpg');  /* If you want a background hero image */
+    background-size: cover;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}

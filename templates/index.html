@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - FlyEdu Abroad{% endblock %}
+
+{% block content %}
+    <section class="hero bg-light py-5">
+        <div class="container text-center">
+            <h1>Welcome to FlyEdu Abroad</h1>
+            <p>Your trusted partner for studying abroad. We guide you every step of the way to your dream education overseas.</p>
+        </div>
+    </section>
+
+    <section class="about-me py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='images/DSC_2455.jpg') }}" alt="Your Photo" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <h2>About Me</h2>
+                    <p>Hi, I'm Mohammad Wajahat Beg, the founder of FlyEdu Abroad. With over 2 years of experience in education consulting, I've helped hundreds of students secure admissions to top universities worldwide. My passion is making international education accessible and stress-free.</p>
+                    <p>We specialize in personalized guidance, from university selection to visa applications. Our success rate is 95%, and we're committed to your future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content py-5 bg-light">
+        <div class="container">
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li>Expert counselors with global experience.</li>
+                <li>Affordable services tailored to your needs.</li>
+                <li>100% Scolarship for Italy </li>
+                <li>Free initial consultation.</li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
