@@ -3,37 +3,165 @@
 {% block title %}Home - FlyEdu Abroad{% endblock %}
 
 {% block content %}
-    <section class="hero bg-light py-5">
-        <div class="container text-center">
-            <h1>Welcome to FlyEdu Abroad</h1>
-            <p>Your trusted partner for studying abroad. We guide you every step of the way to your dream education overseas.</p>
+    <!-- Hero Section -->
+    <section class="text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://cdn.regent.edu/wp-content/uploads/2024/11/marketing-certificate-regent-university-hero-1760x990.jpg') no-repeat center center/cover; min-height: 90vh; display: flex; align-items: center;">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Achieve Your Study Abroad Dreams</h1>
+            <p class="lead fs-3 mb-4">Expert Guidance | High Success Rate | Guaranteed Support</p>
+            <a href="/contact" class="btn btn-primary btn-lg mx-2">Free Consultation</a>
+            <a href="/services" class="btn btn-outline-light btn-lg mx-2">View Services</a>
         </div>
     </section>
 
-    <section class="about-me py-5">
+    <!-- Scrolling Marquee (Guaranteed Part-Time Job Highlight) -->
+    <div class="bg-primary text-warning py-3 overflow-hidden">
+        <div class="marquee text-center fw-bold fs-4">
+            <span>✨ 100% Part-Time Job Assistance Within 1 Month ✨ 95%+ Visa Success Rate ✨ Free Profile Evaluation ✨ Scholarship Support ✨ 1000+ Students Placed ✨ Trusted Partnerships Worldwide ✨</span>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <section class="py-5 bg-light text-center">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <img src="{{ url_for('static', filename='images/DSC_2455.jpg') }}" alt="Your Photo" class="img-fluid rounded-circle">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h2 class="text-primary fw-bold">1000+</h2>
+                    <p>Students Placed Abroad</p>
                 </div>
-                <div class="col-md-8">
-                    <h2>About Me</h2>
-                    <p>Hi, I'm Mohammad Wajahat Beg, the founder of FlyEdu Abroad. With over 2 years of experience in education consulting, I've helped hundreds of students secure admissions to top universities worldwide. My passion is making international education accessible and stress-free.</p>
-                    <p>We specialize in personalized guidance, from university selection to visa applications. Our success rate is 95%, and we're committed to your future.</p>
+                <div class="col-md-3 mb-4">
+                    <h2 class="text-primary fw-bold">300+</h2>
+                    <p>Partner Universities</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h2 class="text-primary fw-bold">15+</h2>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h2 class="text-primary fw-bold">500+</h2>
+                    <p>Scholarships Secured</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="content py-5 bg-light">
+    <!-- Why Choose Us -->
+    <section class="py-5">
         <div class="container">
-            <h2>Why Choose Us?</h2>
-            <ul>
-                <li>Expert counselors with global experience.</li>
-                <li>Affordable services tailored to your needs.</li>
-                <li>100% Scolarship for Italy </li>
-                <li>Free initial consultation.</li>
-            </ul>
+            <h2 class="text-center mb-5">Why Choose FlyEdu Abroad?</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                    <h4>Expert Guidance</h4>
+                    <p>Personalized counseling from experienced professionals.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-check-circle fa-3x text-primary mb-3"></i>
+                    <h4>High Success Rate</h4>
+                    <p>95%+ visa and admission approvals.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                    <h4>Global Partnerships</h4>
+                    <p>Tie-ups with top universities worldwide.</p>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Popular Destinations -->
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <h2 class="mb-4">Popular Study Destinations</h2>
+            <p>We guide students to top countries including USA, UK, Canada, Australia, Germany, Poland, Italy & more.</p>
+            <img src="https://thumbs.dreamstime.com/z/usa-canada-australia-turkey-uae-germany-france-eu-italy-poland-singapore-uk-japan-russia-korea-flag-transparent-background-154771631.jpg" alt="Flags of Popular Study Destinations" class="img-fluid rounded shadow mt-3">
+        </div>
+    </section>
+
+    <!-- Highlighted Part-Time Job Section -->
+    <section class="py-5 text-center bg-primary text-white">
+        <div class="container">
+            <h2 class="fw-bold">100% Part-Time Job Assistance Within 1 Month</h2>
+            <p class="lead">Earn while you learn! We guarantee support to find suitable part-time jobs abroad.</p>
+            <img src="https://www.gooverseas.com/sites/default/files/image-collections/2018-04-17/Working%20in%20Cafe%20Pixabay.jpeg" alt="Student Working Part-Time Abroad" class="img-fluid rounded shadow my-4" style="max-height: 400px;">
+            <a href="/contact" class="btn btn-light btn-lg">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Student Success Stories</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4 text-center">
+                    <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3763258612677616958" alt="Happy Student Testimonial" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
+                    <p>"FlyEdu Abroad made my dream come true!"</p>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <img src="https://www.ramapo.edu/inter-students/wp-content/uploads/sites/232/2016/07/IMG_6032.jpg" alt="International Students Group" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
+                    <p>"Best guidance and support throughout."</p>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <img src="https://www.avanse.com/blogs/images/students%20in%20Singapore%20(5).png" alt="Successful Study Abroad Students" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
+                    <p>"Got scholarship and visa easily!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5>University Admissions</h5>
+                            <p>Personalized selection & application support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5>Visa Guidance</h5>
+                            <p>Documentation & interview preparation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5>Pre-Departure Support</h5>
+                            <p>Accommodation & settling assistance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/services" class="btn btn-primary btn-lg">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5 text-center bg-dark text-white">
+        <div class="container">
+            <h2>Ready to Fly Abroad?</h2>
+            <p class="lead">Book your free consultation today!</p>
+            <a href="/contact" class="btn btn-success btn-lg">Contact Us Now</a>
+        </div>
+    </section>
+
+    <!-- CSS for Marquee -->
+    <style>
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
 {% endblock %}

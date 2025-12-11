@@ -1,18 +1,187 @@
 {% extends 'base.html' %}
 
-{% block title %}Services - FlyEdu Abroad{% endblock %}
+{% block title %}Our Services - FlyEdu Abroad{% endblock %}
 
 {% block content %}
-    <section class="py-5">
-        <div class="container">
-            <h1>Our Services</h1>
-            <ul>
-                <li>University Selection & Admissions</li>
-                <li>Visa Guidance</li>
-                <li>Scholarship Assistance</li>
-                <li>IELTS/TOEFL Preparation</li>
-                <li>Pre-Departure Briefing</li>
-            </ul>
+    <!-- Hero Section -->
+    <section class="text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://gostudyin.com/wp-content/uploads/2025/03/about-hero.png') no-repeat center center/cover;">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold">Our Comprehensive Services</h1>
+            <p class="lead">End-to-end support for your study abroad journey – from profile building to settling in your dream destination.</p>
         </div>
     </section>
+
+    <!-- Beautiful Scrolling Marquee Line -->
+    <div class="bg-primary text-warning py-3 overflow-hidden">
+        <div class="marquee text-center fw-bold fs-4">
+            <span>✨ 100% Part-Time Job Assistance Within 1 Month ✨ High Visa Success Rate ✨ Free Profile Evaluation ✨100% Scholarship  ✨ Trusted by 100+ Students ✨ Start Your Journey Today! ✨</span>
+        </div>
+    </div>
+
+    <!-- Services Accordion -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Explore Our Services</h2>
+            <div class="accordion" id="servicesAccordion">
+
+                <!-- University Selection & Application -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service1">
+                            <strong>University Selection & Admission Assistance</strong>
+                        </button>
+                    </h2>
+                    <div id="service1" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p>We help you choose the best universities and courses based on your profile, budget, and career goals.</p>
+                            <ul>
+                                <li>Personalized shortlisting of universities</li>
+                                <li>Application submission to multiple universities</li>
+                                <li>SOP, LOR, and essay editing</li>
+                                <li>Interview preparation</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://www.insidehighered.com/sites/default/files/media/Getty/GettyImages-1362788656.jpg" alt="University Counseling Session" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visa Guidance -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service2">
+                            <strong>Visa Application & Interview Preparation</strong>
+                        </button>
+                    </h2>
+                    <div id="service2" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p>Our experts ensure your visa application is perfect with highest approval chances.</p>
+                            <ul>
+                                <li>Complete visa documentation support</li>
+                                <li>Mock interviews</li>
+                                <li>File preparation & submission guidance</li>
+                                <li>95%+ visa success rate</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://thumbs.dreamstime.com/b/green-visa-approved-stamp-white-paper-background-close-up-image-marking-symbolizing-successful-application-immigration-340424107.jpg" alt="Visa Approved Stamp" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scholarship Assistance -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service3">
+                            <strong>Scholarship & Financial Aid Guidance</strong>
+                        </button>
+                    </h2>
+                    <div id="service3" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p>We help you find and apply for scholarships to reduce your study costs.</p>
+                            <ul>
+                                <li>Scholarship search & eligibility check</li>
+                                <li>Application support</li>
+                                <li>500+ scholarships secured for our students</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/6b713fb8-a8ef-4ca5-9dbc-be4058e67d74.png" alt="Scholarship Certificate" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Test Preparation -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service4">
+                            <strong>IELTS / TOEFL / PTE Coaching</strong>
+                        </button>
+                    </h2>
+                    <div id="service4" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p>Expert coaching to achieve your required scores.</p>
+                            <ul>
+                                <li>Online & offline classes</li>
+                                <li>Personalized study plan</li>
+                                <li>Mock tests & feedback</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://nicolaacademy.edu.np/public/nicola/blogs/image/20240321-112500715725601.jpg" alt="IELTS Coaching Class" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part-Time Job Assistance (Special Highlight) -->
+                <div class="accordion-item border-primary">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#service5">
+                            <strong>100% Part-Time Job Assistance Within 1 Month</strong>
+                        </button>
+                    </h2>
+                    <div id="service5" class="accordion-collapse collapse show" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p class="fw-bold text-primary">Guaranteed support to find part-time jobs abroad so you can earn while studying!</p>
+                            <ul>
+                                <li>Job search guidance in your study destination</li>
+                                <li>Resume building for local jobs</li>
+                                <li>Connections with employers (cafes, retail, campus jobs)</li>
+                                <li>Help with work permits where required</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://www.gooverseas.com/sites/default/files/image-collections/2018-04-17/Working%20in%20Cafe%20Pixabay.jpeg" alt="Student Working Part-Time Abroad" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pre-Departure & Post-Landing -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service6">
+                            <strong>Pre-Departure Briefing & Accommodation</strong>
+                        </button>
+                    </h2>
+                    <div id="service6" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                        <div class="accordion-body">
+                            <p>Complete support before and after you land.</p>
+                            <ul>
+                                <li>Accommodation arrangement</li>
+                                <li>Airport pickup guidance</li>
+                                <li>Cultural orientation</li>
+                                <li>Bank account & SIM card help</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <img src="https://eduplanethub.org/wp-content/uploads/2024/05/11-1.jpg" alt="Pre-Departure Briefing" class="img-fluid rounded shadow" style="max-height: 350px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 text-center bg-primary text-white">
+        <div class="container">
+            <h2>Ready to Start Your Study Abroad Journey?</h2>
+            <p class="lead">Get your free consultation today!</p>
+            <a href="/contact" class="btn btn-light btn-lg">Contact Us Now</a>
+        </div>
+    </section>
+
+    <!-- CSS for Marquee (add this in base.html or style.css) -->
+    <style>
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
 {% endblock %}

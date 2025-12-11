@@ -1,13 +1,161 @@
 {% extends 'base.html' %}
 
-{% block title %}About - FlyEdu Abroad{% endblock %}
+{% block title %}About Us - FlyEdu Abroad{% endblock %}
 
 {% block content %}
+    <!-- Hero Section -->
+    <section class="hero-about text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ url_for('static', filename='images/about-hero.jpg') }}') no-repeat center center/cover;">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold">About FlyEdu Abroad</h1>
+            <p class="lead">Your Trusted Partner in Achieving Global Education Dreams</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2>Who We Are</h2>
+            <p>FlyEdu Abroad specializes in helping students achieve their dreams of studying abroad. With years of experience, we provide expert guidance and comprehensive support to navigate the complexities of international education. Our dedicated team ensures a seamless journey from initial consultation to successful settlement in your dream destination.</p>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="https://static.vecteezy.com/system/resources/previews/068/299/134/large_2x/modern-academic-advising-office-interior-with-minimalist-furniture-and-natural-light-featuring-a-desk-chairs-computer-and-potted-plant-for-professional-consulting-and-educational-guidance-photo.jpeg" alt="Professional Consultancy Office" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-md-6">
+                    <p>We are committed to making international education accessible, affordable, and stress-free. Whether you're aiming for top universities in USA, UK, Canada, or emerging destinations like Poland and Italy, we're here to guide you every step of the way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
     <section class="py-5">
         <div class="container">
-            <h1>Wajahat Beg</h1>
-            <p>FlyEdu Abroad is a leading education consultancy dedicated to helping students achieve their dreams of studying overseas. Founded in [Year], we provide end-to-end support for admissions, scholarships, and more.</p>
-            <p>Our team of experts ensures a smooth journey from application to arrival.</p>
+            <h2 class="text-center mb-5">Our Mission & Vision</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Our Mission</h3>
+                    <p>To revolutionize the study abroad experience through extensive research in curriculum development, student engagement, and promoting flexible education options. We provide 100% personalized support to ensure every student reaches their full potential.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Our Vision</h3>
+                    <p>To be the leading education consultancy globally, known for highest success rates, innovative solutions, and life-changing opportunities. Key highlights: 100% scholarship guidance for eligible programs, No IELTS required for most destinations, Full support from application to visa, and English-taught courses available worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+<!-- Team Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Meet Our Expert Team</h2>
+        <div class="row text-center">
+            <!-- First Counselor (Tumhara) -->
+            <div class="col-md-6 mb-5">
+                <img src="{{ url_for('static', filename='images/DSC_2455.JPG') }}" alt="Wajahat Beg - Founder & Lead Counselor" class="img-fluid rounded-circle shadow mb-3" style="width: 250px; height: 250px; object-fit: cover;">
+                <h4>Mohammad Wajahat Beg</h4>
+                <p class="fw-bold">Founder & Senior Counselor</p>
+                <p>Specialist in Poland, UK, Canada, Australia<br>5+ years experience | 100+ successful students<br>Expert in admissions, scholarships & visa processing</p>
+            </div>
+
+            <!-- Second Counselor -->
+            <div class="col-md-6 mb-5">
+                <img src="{{ url_for('static', filename='images/ziaul.jpg') }}" alt="Team Member - Europe Specialist" class="img-fluid rounded-circle shadow mb-3" style="width: 220px; height: 220px; object-fit: cover;">
+                <h4>Ziaul Beg</h4>
+                <p class="fw-bold">Europe & Emerging Destinations Expert</p>
+                <p>Specialist in Germany, Italy, Ireland<br>Expert in No-IELTS programs & high scholarships<br>Full support for visa and part-time job guidance</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Services Overview Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <p class="text-center lead mb-4">We offer expert guidance with personalized advice to choose the right university and program, comprehensive support from application to visa processing, and a proven track record in helping students gain admission to their dream universities.</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-body">
+                            <i class="fas fa-graduation-cap fa-2x text-primary mb-3"></i>
+                            <h5>University Selection</h5>
+                            <p>Personalized shortlisting based on your profile and goals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-body">
+                            <i class="fas fa-passport fa-2x text-primary mb-3"></i>
+                            <h5>Visa Support</h5>
+                            <p>End-to-end visa application and interview preparation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-body">
+                            <i class="fas fa-award fa-2x text-primary mb-3"></i>
+                            <h5>Scholarship Guidance</h5>
+                            <p>100% assistance for scholarships and financial aid.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="py-5 text-white" style="background: #0d6efd;">
+        <div class="container text-center">
+            <h2>Our Achievements</h2>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <h3>5+</h3>
+                    <p>Years of Experience</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>200+</h3>
+                    <p>University Partnerships</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>500+</h3>
+                    <p>Successful Students</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>20+</h3>
+                    <p>Countries Covered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Get in Touch</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Email:</strong> info@flyeduabroad.com</p>
+                    <p><strong>Phone/WhatsApp:</strong> +91 8191876059</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Address:</strong><br>Old City Bareilly U.P. India <br>Online Consultations Available Worldwide</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/contact" class="btn btn-primary btn-lg">Book Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 text-center bg-primary text-white">
+        <div class="container">
+            <h2>Ready to Start Your Journey?</h2>
+            <p class="lead">Join hundreds of successful students who've flown abroad with us.</p>
+            <a href="/contact" class="btn btn-light btn-lg">Contact Us Now</a>
         </div>
     </section>
 {% endblock %}
