@@ -18,9 +18,7 @@
     top: 50%; left: 50%; transform: translate(-50%, -50%);
     border-radius: 50%;
 }
-
 .form-section { padding: 4rem 0; background: var(--navy-mid); }
-
 .form-card {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.08);
@@ -29,78 +27,51 @@
 }
 .form-group { margin-bottom: 1.2rem; }
 .form-label-sm {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
     color: rgba(232,236,240,0.45);
-    margin-bottom: 0.5rem;
-    display: block;
+    margin-bottom: 0.5rem; display: block;
 }
 .form-field {
     width: 100%;
     background: rgba(255,255,255,0.04);
     border: 1.5px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    color: #e8ecf0;
+    border-radius: 12px; color: #e8ecf0;
     padding: 0.8rem 1rem;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    transition: all 0.3s;
+    font-size: 0.95rem; transition: all 0.3s;
 }
 .form-field:focus {
-    outline: none;
-    border-color: var(--gold);
+    outline: none; border-color: var(--gold);
     background: rgba(245,197,24,0.04);
-    box-shadow: 0 0 0 3px rgba(245,197,24,0.1);
-    color: #fff;
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.1); color: #fff;
 }
 .form-field::placeholder { color: rgba(232,236,240,0.3); }
 .form-field option { background: #0a1628; }
-
 .btn-submit {
     background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
-    color: #fff;
-    font-weight: 700;
-    font-size: 1rem;
-    border: none;
-    border-radius: 12px;
-    padding: 1rem;
-    width: 100%;
-    cursor: pointer;
-    transition: all 0.3s;
+    color: #fff; font-weight: 700; font-size: 1rem;
+    border: none; border-radius: 12px; padding: 1rem;
+    width: 100%; cursor: pointer; transition: all 0.3s;
     box-shadow: 0 8px 30px rgba(0,200,122,0.3);
 }
 .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,200,122,0.5); }
-
-/* Info sidebar */
+.btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 .info-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 1.2rem;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: 20px; padding: 2rem; margin-bottom: 1.2rem;
 }
-.info-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-}
-
-/* Success Banner */
+.info-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
 .success-banner {
     background: linear-gradient(135deg, rgba(0,200,122,0.12), rgba(0,160,98,0.08));
     border: 1px solid rgba(0,200,122,0.3);
-    border-radius: 16px;
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    border-radius: 16px; padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1rem;
     margin-bottom: 2rem;
     animation: fadeInDown 0.6s ease;
+    display: none;
 }
+.success-banner.show { display: flex; }
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-16px); }
     to { opacity: 1; transform: translateY(0); }
@@ -118,7 +89,7 @@
             1000+ students placed &bull; 95%+ visa success &bull; Free consultation
         </p>
         <a href="https://wa.me/918191876059" target="_blank"
-           style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;padding:0.8rem 2rem;border-radius:100px;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,0.4);transition:all 0.3s;">
+           style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;padding:0.8rem 2rem;border-radius:100px;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,0.4);">
             <i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp
         </a>
     </div>
@@ -128,24 +99,23 @@
     <div class="container">
         <div class="row g-5 align-items-start">
 
-            <!-- FORM -->
             <div class="col-lg-7">
+
                 <!-- Success Banner -->
-                {% if submitted %}
-                <div class="success-banner">
+                <div class="success-banner" id="successBanner">
                     <div style="font-size:2rem;">🎉</div>
                     <div>
                         <div style="font-weight:700;color:#00c87a;font-size:1.05rem;">Form submitted successfully!</div>
                         <div style="color:rgba(232,236,240,0.6);font-size:0.9rem;margin-top:0.2rem;">Our counselor will call you back within 5 minutes.</div>
                     </div>
                 </div>
-                {% endif %}
 
                 <div class="form-card">
                     <h3 style="font-family:'Playfair Display',serif;font-weight:800;color:#fff;margin-bottom:0.3rem;">Fill Your Details</h3>
                     <p style="color:rgba(232,236,240,0.4);font-size:0.88rem;margin-bottom:2rem;">We'll call you back in 5 minutes ⚡</p>
 
-                    <form method="POST" action="/contact">
+                    <!-- EmailJS form — no method/action needed -->
+                    <form id="contactForm">
                         <div class="row g-3">
                             <div class="col-md-6 form-group">
                                 <label class="form-label-sm">First Name</label>
@@ -192,10 +162,10 @@
                             </div>
                             <div class="col-12 form-group">
                                 <label class="form-label-sm">Your Query (Optional)</label>
-                                <textarea class="form-field" name="message" rows="3" placeholder="Tell us about your situation, goals, or any questions..."></textarea>
+                                <textarea class="form-field" name="message" rows="3" placeholder="Tell us about your situation..."></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn-submit">
+                                <button type="submit" class="btn-submit" id="submitBtn">
                                     <i class="fas fa-bolt me-2"></i> Get Free Call Back Now
                                 </button>
                                 <p style="text-align:center;font-size:0.78rem;color:rgba(232,236,240,0.3);margin-top:0.8rem;">
@@ -211,23 +181,19 @@
             <div class="col-lg-5">
                 <div style="position:sticky;top:100px;">
                     <h4 style="font-family:'Playfair Display',serif;color:#fff;font-weight:800;margin-bottom:1.5rem;">Reach Us Directly</h4>
-
                     <div class="info-card">
                         <div class="info-icon" style="background:rgba(37,211,102,0.1);">📱</div>
                         <h6 style="color:#fff;font-weight:700;margin-bottom:0.3rem;">WhatsApp (Fastest)</h6>
-                        <a href="https://wa.me/919760415452" style="color:var(--gold);text-decoration:none;font-weight:600;">+91 97604 15452</a>
+                        <a href="https://wa.me/918191876059" style="color:var(--gold);text-decoration:none;font-weight:600;">+91 81918 76059</a>
                         <p style="color:rgba(232,236,240,0.4);font-size:0.82rem;margin-top:0.3rem;">Usually responds in &lt; 2 minutes</p>
                     </div>
-
                     <div class="info-card">
                         <div class="info-icon" style="background:rgba(245,197,24,0.1);">🕐</div>
                         <h6 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">Office Hours</h6>
                         <div style="color:rgba(232,236,240,0.6);font-size:0.9rem;line-height:1.8;">
-                            Mon – Sat: 9:00 AM – 7:00 PM<br>
-                            Sunday: 10:00 AM – 4:00 PM
+                            Mon – Sat: 9:00 AM – 7:00 PM<br>Sunday: 10:00 AM – 4:00 PM
                         </div>
                     </div>
-
                     <div class="info-card">
                         <div class="info-icon" style="background:rgba(59,130,246,0.1);">🌍</div>
                         <h6 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">We Specialize In</h6>
@@ -237,13 +203,10 @@
                             {% endfor %}
                         </div>
                     </div>
-
-                    <!-- Quick Stats -->
                     <div style="background:linear-gradient(135deg,rgba(245,197,24,0.08),rgba(245,197,24,0.03));border:1px solid rgba(245,197,24,0.15);border-radius:20px;padding:1.5rem;">
                         <h6 style="color:var(--gold);font-weight:700;margin-bottom:1rem;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;">Why Students Trust Us</h6>
                         <div style="display:flex;flex-direction:column;gap:0.8rem;">
-                            {% set points = ['95%+ Visa Success Rate', '1000+ Students Placed', 'Part-Time Job in 30 Days', 'Free Profile Evaluation', '₹50Cr+ Scholarships Won'] %}
-                            {% for point in points %}
+                            {% for point in ['95%+ Visa Success Rate', '1000+ Students Placed', 'Part-Time Job in 30 Days', 'Free Profile Evaluation', '₹50Cr+ Scholarships Won'] %}
                             <div style="display:flex;align-items:center;gap:0.7rem;color:rgba(232,236,240,0.7);font-size:0.88rem;">
                                 <i class="fas fa-check-circle" style="color:var(--emerald);"></i> {{ point }}
                             </div>
@@ -260,7 +223,19 @@
 {% endblock %}
 
 {% block extra_js %}
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ══════════════════════════════════════
+// EMAILJS SETUP — Apni IDs yahan daalo
+// ══════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = "0gxldb6--j5y_PMe0";   // ← EmailJS Public Key
+const EMAILJS_SERVICE_ID  = "service_a7wa8jk";   // ← EmailJS Service ID
+const EMAILJS_TEMPLATE_ID = "template_dt1megn";  // ← EmailJS Template ID
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// Country toggle
 function contactToggleCountry() {
     const val = document.getElementById('contactInterest').value;
     document.getElementById('contactCountryField').style.display = val ? 'block' : 'none';
@@ -268,15 +243,50 @@ function contactToggleCountry() {
     document.querySelectorAll('.mbbs-opt').forEach(el => el.style.display = val === 'MBBS / Medical' ? '' : 'none');
 }
 
-// Show toast on submission
-{% if submitted %}
-setTimeout(() => {
-    const toast = document.getElementById('successToast');
-    if (toast) {
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 6000);
-    }
-}, 300);
-{% endif %}
+// Form submit
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+
+    const formData = new FormData(this);
+    const templateParams = {
+        first_name: formData.get('first_name'),
+        last_name:  formData.get('last_name'),
+        phone:      formData.get('phone'),
+        email:      formData.get('email'),
+        interest:   formData.get('interest') || 'N/A',
+        country:    formData.get('country')  || 'N/A',
+        message:    formData.get('message')  || '—',
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(() => {
+            // Show success
+            document.getElementById('successBanner').classList.add('show');
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactCountryField').style.display = 'none';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-bolt me-2"></i> Get Free Call Back Now';
+
+            // Show toast
+            const toast = document.getElementById('successToast');
+            if (toast) {
+                setTimeout(() => toast.classList.add('show'), 300);
+                setTimeout(() => toast.classList.remove('show'), 5000);
+            }
+
+            // Scroll to top of form
+            document.getElementById('successBanner').scrollIntoView({ behavior: 'smooth' });
+        })
+        .catch((error) => {
+            console.error('EmailJS Error:', error);
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-bolt me-2"></i> Get Free Call Back Now';
+            alert('Something went wrong. Please WhatsApp us directly!');
+        });
+});
 </script>
 {% endblock %}
