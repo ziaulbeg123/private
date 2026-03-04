@@ -1,161 +1,295 @@
 {% extends 'base.html' %}
-
 {% block title %}About Us - FlyEdu Abroad{% endblock %}
 
+{% block extra_css %}
+<style>
+.about-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+}
+.about-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1523050858588-9d7f8c92c6d4?w=1800') center/cover no-repeat;
+    opacity: 0.1;
+}
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+.orb-1 { width: 550px; height: 550px; background: rgba(245,197,24,0.08); top: -150px; right: -100px; }
+.orb-2 { width: 400px; height: 400px; background: rgba(0,200,122,0.06); bottom: -100px; left: -50px; }
+.who-section { padding: 5rem 0; background: var(--navy-mid); }
+.who-img-wrap { border-radius: 24px; overflow: hidden; position: relative; }
+.who-img-wrap img { width: 100%; height: 420px; object-fit: cover; }
+.who-img-wrap::after {
+    content: ''; position: absolute; inset: 0;
+    border: 1.5px solid rgba(245,197,24,0.15);
+    border-radius: 24px; pointer-events: none;
+}
+.img-badge {
+    position: absolute; bottom: 1.5rem; left: 1.5rem;
+    background: rgba(4,13,33,0.88); backdrop-filter: blur(12px);
+    border: 1px solid rgba(245,197,24,0.2); border-radius: 14px; padding: 1rem 1.5rem;
+}
+.img-badge .num { font-family: 'Playfair Display',serif; font-size: 2rem; font-weight: 900; color: var(--gold); line-height: 1; }
+.img-badge .lbl { font-size: 0.78rem; color: rgba(232,236,240,0.5); margin-top: 0.2rem; }
+.mv-section { padding: 5rem 0; background: var(--navy); }
+.mv-card {
+    padding: 3rem; border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    height: 100%; transition: all 0.4s;
+    position: relative; overflow: hidden;
+}
+.mv-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+.mv-card.mission::before { background: linear-gradient(90deg, var(--gold), transparent); }
+.mv-card.vision::before  { background: linear-gradient(90deg, var(--emerald), transparent); }
+.mv-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.2); }
+.mv-icon { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.5rem; }
+.team-section { padding: 5rem 0; background: var(--navy-mid); }
+.team-card {
+    text-align: center; padding: 2.5rem 2rem; border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.4s; height: 100%;
+}
+.team-card:hover { transform: translateY(-8px); border-color: rgba(245,197,24,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.team-avatar {
+    width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+    border: 3px solid rgba(245,197,24,0.25);
+    margin: 0 auto 1.5rem; display: block; transition: all 0.4s;
+}
+.team-card:hover .team-avatar { border-color: var(--gold); box-shadow: 0 0 0 6px rgba(245,197,24,0.1); }
+.team-name { font-family: 'Playfair Display',serif; font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem; }
+.team-role { color: var(--gold); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.8rem; }
+.team-desc { color: rgba(232,236,240,0.5); font-size: 0.85rem; line-height: 1.7; }
+.team-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-top: 1rem; }
+.team-tag { background: rgba(245,197,24,0.07); border: 1px solid rgba(245,197,24,0.15); color: rgba(245,197,24,0.75); padding: 0.2rem 0.7rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; }
+.ach-section { padding: 5rem 0; background: var(--navy); }
+.ach-card { text-align: center; padding: 2.5rem 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); transition: all 0.4s; }
+.ach-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.25); }
+.ach-num { font-family: 'Playfair Display',serif; font-size: 3rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+.ach-label { color: rgba(232,236,240,0.5); font-size: 0.88rem; margin-top: 0.6rem; }
+.about-cta { padding: 5rem 0; background: linear-gradient(135deg, var(--navy-light), var(--navy-mid)); text-align: center; position: relative; overflow: hidden; }
+.about-cta::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,197,24,0.07) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); border-radius: 50%; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--navy); font-weight: 700; border-radius: 100px; padding: 0.9rem 2.5rem; border: none; font-size: 1rem; transition: all 0.3s; box-shadow: 0 8px 30px rgba(245,197,24,0.3); display: inline-block; text-decoration: none; }
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(245,197,24,0.5); color: var(--navy); }
+</style>
+{% endblock %}
+
 {% block content %}
-    <!-- Hero Section -->
-    <section class="hero-about text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ url_for('static', filename='images/about-hero.jpg') }}') no-repeat center center/cover;">
-        <div class="container py-5">
-            <h1 class="display-4 fw-bold">About FlyEdu Abroad</h1>
-            <p class="lead">Your Trusted Partner in Achieving Global Education Dreams</p>
-        </div>
-    </section>
 
-    <!-- Introduction Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2>Who We Are</h2>
-            <p>FlyEdu Abroad specializes in helping students achieve their dreams of studying abroad. With years of experience, we provide expert guidance and comprehensive support to navigate the complexities of international education. Our dedicated team ensures a seamless journey from initial consultation to successful settlement in your dream destination.</p>
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <img src="https://static.vecteezy.com/system/resources/previews/068/299/134/large_2x/modern-academic-advising-office-interior-with-minimalist-furniture-and-natural-light-featuring-a-desk-chairs-computer-and-potted-plant-for-professional-consulting-and-educational-guidance-photo.jpeg" alt="Professional Consultancy Office" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-md-6">
-                    <p>We are committed to making international education accessible, affordable, and stress-free. Whether you're aiming for top universities in USA, UK, Canada, or emerging destinations like Poland and Italy, we're here to guide you every step of the way.</p>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="container py-5 position-relative text-center">
+        <div class="reveal">
+            <div class="section-eyebrow mb-3">Our Story</div>
+            <h1 class="section-title mb-4" style="font-size:clamp(2.5rem,5vw,4rem);">
+                About FlyEdu Abroad
+            </h1>
+            <p style="color:rgba(232,236,240,0.55);font-size:1.1rem;max-width:580px;margin:0 auto 2.5rem;line-height:1.8;">
+                Trusted by 1000+ Students &bull; 95%+ Visa Success &bull; Part-Time Job Guarantee
+            </p>
+            <a href="/contact" class="btn-gold" style="font-size:1.05rem;padding:1rem 2.5rem;">Get Free Counseling</a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Mission & Vision Section -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Mission & Vision</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Our Mission</h3>
-                    <p>To revolutionize the study abroad experience through extensive research in curriculum development, student engagement, and promoting flexible education options. We provide 100% personalized support to ensure every student reaches their full potential.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3>Our Vision</h3>
-                    <p>To be the leading education consultancy globally, known for highest success rates, innovative solutions, and life-changing opportunities. Key highlights: 100% scholarship guidance for eligible programs, No IELTS required for most destinations, Full support from application to visa, and English-taught courses available worldwide.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-<!-- Team Section -->
-<section class="py-5 bg-light">
+<!-- WHO WE ARE -->
+<section class="who-section">
     <div class="container">
-        <h2 class="text-center mb-5">Meet Our Expert Team</h2>
-        <div class="row text-center">
-            <!-- First Counselor (Tumhara) -->
-            <div class="col-md-6 mb-5">
-                <img src="{{ url_for('static', filename='images/DSC_2455.JPG') }}" alt="Wajahat Beg - Founder & Lead Counselor" class="img-fluid rounded-circle shadow mb-3" style="width: 250px; height: 250px; object-fit: cover;">
-                <h4>Mohammad Wajahat Beg</h4>
-                <p class="fw-bold">Founder & Senior Counselor</p>
-                <p>Specialist in Poland, UK, Canada, Australia<br>5+ years experience | 100+ successful students<br>Expert in admissions, scholarships & visa processing</p>
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 reveal">
+                <div class="who-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=800" alt="FlyEdu Team">
+                    <div class="img-badge">
+                        <div class="num">1000+</div>
+                        <div class="lbl">Students Placed Abroad</div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Second Counselor -->
-            <div class="col-md-6 mb-5">
-                <img src="{{ url_for('static', filename='images/ziaul.jpg') }}" alt="Team Member - Europe Specialist" class="img-fluid rounded-circle shadow mb-3" style="width: 220px; height: 220px; object-fit: cover;">
-                <h4>Ziaul Beg</h4>
-                <p class="fw-bold">Europe & Emerging Destinations Expert</p>
-                <p>Specialist in Germany, Italy, Ireland<br>Expert in No-IELTS programs & high scholarships<br>Full support for visa and part-time job guidance</p>
+            <div class="col-lg-6 reveal">
+                <div class="section-eyebrow mb-3">Who We Are</div>
+                <h2 class="section-title mb-4">India's Most Trusted<br>Study Abroad Consultancy</h2>
+                <p style="color:rgba(232,236,240,0.6);font-size:1rem;line-height:1.85;margin-bottom:1.2rem;">
+                    FlyEdu Abroad is a premium study abroad consultancy focused on transparent, ethical, and result-driven international education guidance.
+                </p>
+                <p style="color:rgba(232,236,240,0.6);font-size:1rem;line-height:1.85;margin-bottom:2rem;">
+                    We handle everything — from profile building, university shortlisting, and visa success, to part-time job placement once you land. One team, complete support.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(232,236,240,0.7);font-size:0.88rem;"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Ethical & Transparent</div>
+                    <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(232,236,240,0.7);font-size:0.88rem;"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> Result-Driven</div>
+                    <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(232,236,240,0.7);font-size:0.88rem;"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> 360° Support</div>
+                    <div style="display:flex;align-items:center;gap:0.5rem;color:rgba(232,236,240,0.7);font-size:0.88rem;"><i class="fas fa-check-circle" style="color:var(--emerald);"></i> No Hidden Fees</div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-    <!-- Services Overview Section -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Services</h2>
-            <p class="text-center lead mb-4">We offer expert guidance with personalized advice to choose the right university and program, comprehensive support from application to visa processing, and a proven track record in helping students gain admission to their dream universities.</p>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-body">
-                            <i class="fas fa-graduation-cap fa-2x text-primary mb-3"></i>
-                            <h5>University Selection</h5>
-                            <p>Personalized shortlisting based on your profile and goals.</p>
-                        </div>
+<!-- MISSION & VISION -->
+<section class="mv-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Our Purpose</div>
+            <h2 class="section-title">Mission & Vision</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6 reveal">
+                <div class="mv-card mission">
+                    <div class="mv-icon" style="background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);">🎯</div>
+                    <h3 style="font-family:'Playfair Display',serif;color:#fff;font-weight:800;margin-bottom:1rem;">Our Mission</h3>
+                    <p style="color:rgba(232,236,240,0.6);font-size:1rem;line-height:1.8;margin:0;">To provide ethical, transparent and guaranteed study abroad guidance with maximum scholarships and visa success — making international education accessible to every deserving student in India.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 reveal">
+                <div class="mv-card vision">
+                    <div class="mv-icon" style="background:rgba(0,200,122,0.1);border:1px solid rgba(0,200,122,0.2);">🌍</div>
+                    <h3 style="font-family:'Playfair Display',serif;color:#fff;font-weight:800;margin-bottom:1rem;">Our Vision</h3>
+                    <p style="color:rgba(232,236,240,0.6);font-size:1rem;line-height:1.8;margin:0;">To become India's most trusted study abroad brand by 2030 — placing 10,000+ students in top global universities while maintaining 100% transparency and student satisfaction.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">The People</div>
+            <h2 class="section-title">Meet Our Expert Team</h2>
+        </div>
+        <div class="row g-4 justify-content-center mb-4">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/DSC_2455.JPG') }}" alt="Mohammad Wajahat Beg" class="team-avatar">
+                    <div class="team-name">Mohammad Wajahat Beg</div>
+                    <div class="team-role">Founder & Senior Counselor</div>
+                    <p class="team-desc">1000+ students placed globally. Expert in UK, Canada, Poland & Australia pathways with ₹50Cr+ scholarships secured.</p>
+                    <div class="team-tags">
+                        <span class="team-tag">🇬🇧 UK</span>
+                        <span class="team-tag">🇨🇦 Canada</span>
+                        <span class="team-tag">🇦🇺 Australia</span>
+                        <span class="team-tag">🇵🇱 Poland</span>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-body">
-                            <i class="fas fa-passport fa-2x text-primary mb-3"></i>
-                            <h5>Visa Support</h5>
-                            <p>End-to-end visa application and interview preparation.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-body">
-                            <i class="fas fa-award fa-2x text-primary mb-3"></i>
-                            <h5>Scholarship Guidance</h5>
-                            <p>100% assistance for scholarships and financial aid.</p>
-                        </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/ziaul.jpg') }}" alt="Ziaul Beg" class="team-avatar">
+                    <div class="team-name">Ziaul Beg</div>
+                    <div class="team-role">Europe & MBBS Specialist</div>
+                    <p class="team-desc">Expert in No-IELTS Europe admissions and MBBS abroad. 100% job placement track record across Germany, Italy & Russia.</p>
+                    <div class="team-tags">
+                        <span class="team-tag">🇩🇪 Germany</span>
+                        <span class="team-tag">🇮🇹 Italy</span>
+                        <span class="team-tag">🇷🇺 Russia</span>
+                        <span class="team-tag">🏥 MBBS</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="py-5 text-white" style="background: #0d6efd;">
-        <div class="container text-center">
-            <h2>Our Achievements</h2>
-            <div class="row mt-4">
-                <div class="col-md-3">
-                    <h3>5+</h3>
-                    <p>Years of Experience</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>200+</h3>
-                    <p>University Partnerships</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>500+</h3>
-                    <p>Successful Students</p>
-                </div>
-                <div class="col-md-3">
-                    <h3>20+</h3>
-                    <p>Countries Covered</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='images/h.png') }}" alt="Shujat Beg" class="team-avatar">
+                    <div class="team-name">Shujat Beg</div>
+                    <div class="team-role">Academic Counselor</div>
+                    <p class="team-desc">Specializes in profile building, admissions guidance and student support. Ensures every student gets personalized attention.</p>
+                    <div class="team-tags">
+                        <span class="team-tag">📋 Admissions</span>
+                        <span class="team-tag">📄 Visa Support</span>
+                        <span class="team-tag">🎓 Profile Building</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Information Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Get in Touch</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong>Email:</strong> info@flyeduabroad.com</p>
-                    <p><strong>Phone/WhatsApp:</strong> +91 8191876059</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Address:</strong><br>Old City Bareilly U.P. India <br>Online Consultations Available Worldwide</p>
+<!-- ACHIEVEMENTS -->
+<section class="ach-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">By The Numbers</div>
+            <h2 class="section-title">Our Achievements</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-lg-3 reveal">
+                <div class="ach-card">
+                    <span class="ach-num" data-count="1000" data-suffix="+">0</span>
+                    <div class="ach-label">Students Placed</div>
                 </div>
             </div>
-            <div class="text-center mt-4">
-                <a href="/contact" class="btn btn-primary btn-lg">Book Free Consultation</a>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="ach-card">
+                    <span class="ach-num" data-prefix="₹" data-count="50" data-suffix="Cr+">0</span>
+                    <div class="ach-label">Scholarships Won</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="ach-card">
+                    <span class="ach-num" data-count="95" data-suffix="%+">0</span>
+                    <div class="ach-label">Visa Success Rate</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="ach-card">
+                    <span class="ach-num" data-count="300" data-suffix="+">0</span>
+                    <div class="ach-label">Global Partners</div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Call to Action -->
-    <section class="py-5 text-center bg-primary text-white">
-        <div class="container">
-            <h2>Ready to Start Your Journey?</h2>
-            <p class="lead">Join hundreds of successful students who've flown abroad with us.</p>
-            <a href="/contact" class="btn btn-light btn-lg">Contact Us Now</a>
+<!-- CTA -->
+<section class="about-cta">
+    <div class="container position-relative reveal">
+        <div class="section-eyebrow mb-3">Start Today</div>
+        <h2 class="section-title mb-3">Ready to Start Your Journey?</h2>
+        <p style="color:rgba(232,236,240,0.5);max-width:480px;margin:0 auto 2.5rem;line-height:1.8;">
+            Join 1000+ successful students. Book a free consultation with our expert counselors today.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="/contact" class="btn-gold" style="font-size:1.05rem;padding:1rem 2.5rem;">Book Free Consultation</a>
+            <a href="https://wa.me/918191876059" target="_blank" style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;padding:1rem 2.2rem;border-radius:100px;text-decoration:none;font-size:1.05rem;box-shadow:0 8px 30px rgba(37,211,102,0.3);">
+                <i class="fab fa-whatsapp fa-lg"></i> WhatsApp Us
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '+';
+            let current = 0;
+            const step = target / 60;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(timer); }
+                el.textContent = prefix + Math.floor(current) + suffix;
+            }, 25);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.3 });
+counters.forEach(c => counterObserver.observe(c));
+</script>
 {% endblock %}

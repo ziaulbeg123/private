@@ -17,3 +17,13 @@ body {
 .social-links a:hover {
     text-decoration: underline;
 }
+
+.team-card-center {
+  padding: 40px 20px;
+  border-radius: 20px;
+}
+
+.team-card-center p.text-white-50 {
+  margin-top: 10px;
+  line-height: 1.6;
+}

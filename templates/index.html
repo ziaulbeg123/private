@@ -1,167 +1,831 @@
 {% extends 'base.html' %}
+{% block title %}FlyEdu Abroad – Study Abroad Consultancy{% endblock %}
 
-{% block title %}Home - FlyEdu Abroad{% endblock %}
+{% block extra_css %}
+<style>
+/* ── HERO ── */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--navy);
+}
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1800') center/cover no-repeat;
+    opacity: 0.12;
+}
+.hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+.orb-1 { width: 500px; height: 500px; background: rgba(245,197,24,0.08); top: -100px; left: -100px; }
+.orb-2 { width: 400px; height: 400px; background: rgba(0,200,122,0.06); bottom: -50px; right: 10%; }
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245,197,24,0.1);
+    border: 1px solid rgba(245,197,24,0.25);
+    color: var(--gold);
+    border-radius: 100px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s ease both;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.12;
+    color: #fff;
+    animation: fadeInUp 0.9s ease 0.1s both;
+}
+.hero-title .accent { color: var(--gold); }
+
+.hero-subtitle {
+    color: rgba(232,236,240,0.65);
+    font-size: 1.15rem;
+    line-height: 1.7;
+    max-width: 520px;
+    animation: fadeInUp 0.9s ease 0.2s both;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.9s ease 0.3s both;
+}
+.hero-stat { text-align: left; }
+.hero-stat .num { font-family: 'Playfair Display',serif; font-size: 2rem; font-weight: 900; color: var(--gold); }
+.hero-stat .label { font-size: 0.8rem; color: rgba(232,236,240,0.5); letter-spacing: 0.5px; }
+
+.hero-btns { animation: fadeInUp 0.9s ease 0.4s both; }
+.btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    font-weight: 700;
+    border-radius: 100px;
+    padding: 0.85rem 2.2rem;
+    border: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+    box-shadow: 0 8px 30px rgba(245,197,24,0.3);
+}
+.btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(245,197,24,0.5);
+    color: var(--navy);
+}
+.btn-outline-gold {
+    background: transparent;
+    color: rgba(232,236,240,0.8);
+    border: 1.5px solid rgba(232,236,240,0.2);
+    border-radius: 100px;
+    padding: 0.85rem 2.2rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+.btn-outline-gold:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+}
+
+/* ── HERO FORM ── */
+.hero-form-wrap {
+    background: rgba(15,32,64,0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+    animation: fadeInRight 0.9s ease 0.2s both;
+}
+.form-label-sm {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(232,236,240,0.5);
+    margin-bottom: 0.4rem;
+}
+.form-field {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: #e8ecf0;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    width: 100%;
+}
+.form-field:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(245,197,24,0.05);
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+    color: #fff;
+}
+.form-field option { background: #0a1628; color: #e8ecf0; }
+.form-field::placeholder { color: rgba(232,236,240,0.35); }
+.btn-submit-hero {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    padding: 0.9rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(0,200,122,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.btn-submit-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0,200,122,0.5);
+}
+
+/* ── MARQUEE ── */
+.marquee-section {
+    background: rgba(245,197,24,0.04);
+    border-top: 1px solid rgba(245,197,24,0.1);
+    border-bottom: 1px solid rgba(245,197,24,0.1);
+    padding: 1rem 0;
+    overflow: hidden;
+}
+.marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marqueeScroll 30s linear infinite;
+    width: max-content;
+}
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+.marquee-item .dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── STATS ── */
+.stats-section {
+    padding: 5rem 0;
+    background: var(--navy-mid);
+}
+.stat-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    background: var(--glass);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+.stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245,197,24,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+.stat-card:hover { transform: translateY(-8px); border-color: rgba(245,197,24,0.3); }
+.stat-card:hover::before { opacity: 1; }
+.stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+}
+.stat-label { color: rgba(232,236,240,0.55); font-size: 0.9rem; margin-top: 0.4rem; }
+
+/* ── WHY US ── */
+.why-section {
+    padding: 5rem 0;
+    background: var(--navy);
+}
+.why-card {
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    transition: all 0.4s;
+    height: 100%;
+}
+.why-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(245,197,24,0.25);
+    background: rgba(245,197,24,0.03);
+}
+.why-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, rgba(245,197,24,0.15), rgba(245,197,24,0.05));
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+}
+
+/* ── DESTINATIONS ── */
+.dest-section {
+    padding: 5rem 0;
+    background: var(--navy-mid);
+}
+.dest-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 280px;
+    cursor: pointer;
+}
+.dest-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.dest-card:hover img { transform: scale(1.1); }
+.dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(4,13,33,0.95) 0%, rgba(4,13,33,0.3) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    transition: all 0.4s;
+}
+.dest-card:hover .dest-overlay { background: linear-gradient(to top, rgba(4,13,33,0.98) 0%, rgba(4,13,33,0.5) 60%, transparent 100%); }
+.dest-flag { font-size: 2rem; margin-bottom: 0.3rem; }
+.dest-name { font-family: 'Playfair Display',serif; font-size: 1.3rem; font-weight: 700; color: #fff; }
+.dest-tag {
+    display: inline-block;
+    background: rgba(245,197,24,0.15);
+    border: 1px solid rgba(245,197,24,0.3);
+    color: var(--gold);
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 0.4rem;
+}
+
+/* ── SERVICES ── */
+.services-section {
+    padding: 5rem 0;
+    background: var(--navy);
+}
+.svc-card {
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    height: 100%;
+    transition: all 0.4s;
+    position: relative;
+}
+.svc-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(245,197,24,0.3);
+}
+.svc-icon {
+    width: 64px; height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials-section {
+    padding: 5rem 0;
+    background: var(--navy-mid);
+}
+.testimonial-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s;
+    height: 100%;
+}
+.testimonial-card:hover {
+    border-color: rgba(245,197,24,0.2);
+    transform: translateY(-4px);
+}
+.stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+.testimonial-text { color: rgba(232,236,240,0.75); line-height: 1.75; font-size: 0.95rem; margin: 1rem 0; }
+.reviewer-name { font-weight: 700; color: #fff; }
+.reviewer-info { font-size: 0.8rem; color: rgba(232,236,240,0.4); }
+
+/* ── SECTION LABELS ── */
+.section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+}
+.section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+}
+.section-sub {
+    color: rgba(232,236,240,0.55);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 540px;
+}
+
+/* ── CTA ── */
+.cta-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.cta-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+</style>
+{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <section class="text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://cdn.regent.edu/wp-content/uploads/2024/11/marketing-certificate-regent-university-hero-1760x990.jpg') no-repeat center center/cover; min-height: 90vh; display: flex; align-items: center;">
-        <div class="container">
-            <h1 class="display-3 fw-bold">Achieve Your Study Abroad Dreams</h1>
-            <p class="lead fs-3 mb-4">Expert Guidance | High Success Rate | Guaranteed Support</p>
-            <a href="/contact" class="btn btn-primary btn-lg mx-2">Free Consultation</a>
-            <a href="/services" class="btn btn-outline-light btn-lg mx-2">View Services</a>
-        </div>
-    </section>
 
-    <!-- Scrolling Marquee (Guaranteed Part-Time Job Highlight) -->
-    <div class="bg-primary text-warning py-3 overflow-hidden">
-        <div class="marquee text-center fw-bold fs-4">
-            <span>✨ 100% Part-Time Job Assistance Within 1 Month ✨ 95%+ Visa Success Rate ✨ Free Profile Evaluation ✨ Scholarship Support ✨ 1000+ Students Placed ✨ Trusted Partnerships Worldwide ✨</span>
+<!-- ── HERO ── -->
+<section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+
+    <div class="container py-5">
+        <div class="row align-items-center g-5">
+            <!-- Left -->
+            <div class="col-lg-6">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    India's #1 Study Abroad Consultancy
+                </div>
+                <h1 class="hero-title">
+                    Your Dream<br>University<br>
+                    <span class="accent">Awaits Abroad</span>
+                </h1>
+                <p class="hero-subtitle mt-3 mb-4">
+                    100% Part-Time Job in 30 Days &bull; 95%+ Visa Success &bull; Up to ₹15 Lakh Scholarships
+                </p>
+
+                <div class="hero-btns d-flex flex-wrap gap-3 mb-5">
+                    <a href="/contact" class="btn-gold">Free Profile Evaluation</a>
+                    <a href="/services" class="btn-outline-gold">Our Services</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="num">1000+</div>
+                        <div class="label">Students Placed</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">95%+</div>
+                        <div class="label">Visa Success</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">₹50Cr+</div>
+                        <div class="label">Scholarships</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right - Form -->
+            <div class="col-lg-6">
+                <div class="hero-form-wrap">
+                    <h4 style="font-family:'Playfair Display',serif;font-weight:800;color:#fff;margin-bottom:0.3rem;">Get Free Counseling</h4>
+                    <p style="color:rgba(232,236,240,0.45);font-size:0.85rem;margin-bottom:1.8rem;">We'll call back in 5 minutes ⚡</p>
+
+                    <form method="POST" action="/contact">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label class="form-label-sm">First Name</label>
+                                <input type="text" class="form-field" name="first_name" placeholder="First name" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label-sm">Last Name</label>
+                                <input type="text" class="form-field" name="last_name" placeholder="Last name" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-sm">Phone Number</label>
+                                <input type="tel" class="form-field" name="phone" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-sm">Email Address</label>
+                                <input type="email" class="form-field" name="email" placeholder="you@email.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-sm">Interested In</label>
+                                <select class="form-field" name="interest" id="heroInterest" onchange="heroToggleCountry()" required>
+                                    <option value="">Select your field</option>
+                                    <option value="Tech / Engineering / Business">Tech / Engineering / Business</option>
+                                    <option value="MBBS / Medical">MBBS / Medical</option>
+                                </select>
+                            </div>
+                            <div class="col-12" id="heroCountryField" style="display:none;">
+                                <label class="form-label-sm">Preferred Country</label>
+                                <select class="form-field" name="country">
+                                    <option value="">Select country</option>
+                                    <option class="tech-opt">UK</option>
+                                    <option class="tech-opt">Canada</option>
+                                    <option class="tech-opt">Germany</option>
+                                    <option class="tech-opt">Poland</option>
+                                    <option class="tech-opt">Italy</option>
+                                    <option class="tech-opt">Australia</option>
+                                    <option class="tech-opt">Dubai</option>
+                                    <option class="mbbs-opt">Russia</option>
+                                    <option class="mbbs-opt">Georgia</option>
+                                    <option class="mbbs-opt">Kazakhstan</option>
+                                    <option class="mbbs-opt">Kyrgyzstan</option>
+                                    <option class="mbbs-opt">China</option>
+                                    <option class="mbbs-opt">Philippines</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit-hero">
+                                    <i class="fas fa-bolt"></i> Get Free Call Back Now
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p style="text-align:center;font-size:0.78rem;color:rgba(232,236,240,0.3);margin-top:1rem;">
+                        <i class="fas fa-shield-alt me-1"></i> 100% Free & Confidential
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <!-- Quick Stats -->
-    <section class="py-5 bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <h2 class="text-primary fw-bold">1000+</h2>
-                    <p>Students Placed Abroad</p>
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+    <div class="marquee-track">
+        {% set items = ['100% Part-Time Job in 30 Days', '95%+ Visa Success Rate', 'Up to ₹15 Lakh Scholarships', 'Free Profile Evaluation', '1000+ Students Placed', '300+ Global Partners', 'No IELTS Options Available', 'MBBS Abroad Specialists'] %}
+        {% for item in items %}
+        <span class="marquee-item"><span class="dot"></span>{{ item }}</span>
+        {% endfor %}
+        {% for item in items %}
+        <span class="marquee-item"><span class="dot"></span>{{ item }}</span>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ── STATS ── -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-lg-3 reveal">
+                <div class="stat-card">
+                    <span class="stat-num" data-count="1000">0</span>
+                    <div class="stat-label">Students Placed Abroad</div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <h2 class="text-primary fw-bold">300+</h2>
-                    <p>Partner Universities</p>
+            </div>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="stat-card">
+                    <span class="stat-num" data-count="95" data-suffix="%+">0</span>
+                    <div class="stat-label">Visa Success Rate</div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <h2 class="text-primary fw-bold">15+</h2>
-                    <p>Years of Excellence</p>
+            </div>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="stat-card">
+                    <span class="stat-num" data-prefix="₹" data-count="50" data-suffix="Cr+">0</span>
+                    <div class="stat-label">Scholarships Won</div>
                 </div>
-                <div class="col-md-3 mb-4">
-                    <h2 class="text-primary fw-bold">500+</h2>
-                    <p>Scholarships Secured</p>
+            </div>
+            <div class="col-6 col-lg-3 reveal">
+                <div class="stat-card">
+                    <span class="stat-num" data-count="300" data-suffix="+">0</span>
+                    <div class="stat-label">Global University Partners</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Why Choose Us -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Why Choose FlyEdu Abroad?</h2>
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
-                    <h4>Expert Guidance</h4>
-                    <p>Personalized counseling from experienced professionals.</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <i class="fas fa-check-circle fa-3x text-primary mb-3"></i>
-                    <h4>High Success Rate</h4>
-                    <p>95%+ visa and admission approvals.</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <i class="fas fa-globe fa-3x text-primary mb-3"></i>
-                    <h4>Global Partnerships</h4>
-                    <p>Tie-ups with top universities worldwide.</p>
-                </div>
-            </div>
+<!-- ── DESTINATIONS ── -->
+<section class="dest-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Top Destinations</div>
+            <h2 class="section-title">Study in the World's<br>Best Countries</h2>
         </div>
-    </section>
-
-    <!-- Popular Destinations -->
-    <section class="py-5 bg-light text-center">
-        <div class="container">
-            <h2 class="mb-4">Popular Study Destinations</h2>
-            <p>We guide students to top countries including USA, UK, Canada, Australia, Germany, Poland, Italy & more.</p>
-            <img src="https://thumbs.dreamstime.com/z/usa-canada-australia-turkey-uae-germany-france-eu-italy-poland-singapore-uk-japan-russia-korea-flag-transparent-background-154771631.jpg" alt="Flags of Popular Study Destinations" class="img-fluid rounded shadow mt-3">
-        </div>
-    </section>
-
-    <!-- Highlighted Part-Time Job Section -->
-    <section class="py-5 text-center bg-primary text-white">
-        <div class="container">
-            <h2 class="fw-bold">100% Part-Time Job Assistance Within 1 Month</h2>
-            <p class="lead">Earn while you learn! We guarantee support to find suitable part-time jobs abroad.</p>
-            <img src="https://www.gooverseas.com/sites/default/files/image-collections/2018-04-17/Working%20in%20Cafe%20Pixabay.jpeg" alt="Student Working Part-Time Abroad" class="img-fluid rounded shadow my-4" style="max-height: 400px;">
-            <a href="/contact" class="btn btn-light btn-lg">Get Started Now</a>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Student Success Stories</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4 text-center">
-                    <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3763258612677616958" alt="Happy Student Testimonial" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
-                    <p>"FlyEdu Abroad made my dream come true!"</p>
-                </div>
-                <div class="col-md-4 mb-4 text-center">
-                    <img src="https://www.ramapo.edu/inter-students/wp-content/uploads/sites/232/2016/07/IMG_6032.jpg" alt="International Students Group" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
-                    <p>"Best guidance and support throughout."</p>
-                </div>
-                <div class="col-md-4 mb-4 text-center">
-                    <img src="https://www.avanse.com/blogs/images/students%20in%20Singapore%20(5).png" alt="Successful Study Abroad Students" class="img-fluid rounded-circle shadow mb-3" style="height: 200px; width: 200px; object-fit: cover;">
-                    <p>"Got scholarship and visa easily!"</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Overview -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Services</h2>
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5>University Admissions</h5>
-                            <p>Personalized selection & application support</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5>Visa Guidance</h5>
-                            <p>Documentation & interview preparation</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5>Pre-Departure Support</h5>
-                            <p>Accommodation & settling assistance</p>
-                        </div>
+        <div class="row g-3">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800" alt="UK">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇬🇧</div>
+                        <div class="dest-name">United Kingdom</div>
+                        <div class="dest-tag">Top-Ranked Universities</div>
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="/services" class="btn btn-primary btn-lg">View All Services</a>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800" alt="Canada">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇨🇦</div>
+                        <div class="dest-name">Canada</div>
+                        <div class="dest-tag">PR Pathway</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="dest-card">
+                    <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800" alt="Germany">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇩🇪</div>
+                        <div class="dest-name">Germany</div>
+                        <div class="dest-tag">Free Tuition</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="dest-card" style="height:220px;">
+                    <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800" alt="Poland">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇵🇱</div>
+                        <div class="dest-name">Poland</div>
+                        <div class="dest-tag">No IELTS</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="dest-card" style="height:220px;">
+                    <img src="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=800" alt="Australia">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇦🇺</div>
+                        <div class="dest-name">Australia</div>
+                        <div class="dest-tag">Work Rights</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="dest-card" style="height:220px;">
+                    <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?w=800" alt="Russia">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇷🇺</div>
+                        <div class="dest-name">Russia / Georgia</div>
+                        <div class="dest-tag">MBBS Low Cost</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="dest-card" style="height:220px;">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800" alt="Italy">
+                    <div class="dest-overlay">
+                        <div class="dest-flag">🇮🇹</div>
+                        <div class="dest-name">Italy</div>
+                        <div class="dest-tag">Scholarship Friendly</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Final CTA -->
-    <section class="py-5 text-center bg-dark text-white">
-        <div class="container">
-            <h2>Ready to Fly Abroad?</h2>
-            <p class="lead">Book your free consultation today!</p>
-            <a href="/contact" class="btn btn-success btn-lg">Contact Us Now</a>
+<!-- ── WHY CHOOSE US ── -->
+<section class="why-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Why FlyEdu</div>
+            <h2 class="section-title">Everything You Need<br>In One Place</h2>
         </div>
-    </section>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">🎓</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">360° Support</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">From profile building to landing a job abroad — we're with you at every step.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">✈️</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">100% Part-Time Job Guarantee</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">We guarantee you a part-time job within 30 days of arriving in your destination country.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">🛡️</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">Visa or Money Back</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">95%+ visa success. If we fail, we refund. That's our confidence in your success.*</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">Maximum Scholarships</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">We've unlocked ₹50Cr+ in scholarships for 1000+ students. We know how to get you funded.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">🩺</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">MBBS Specialists</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">Expert guidance for medical students. Russia, Georgia, Philippines, Kazakhstan & more.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="why-card">
+                    <div class="why-icon">📞</div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">Personal Counselor</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.9rem;line-height:1.7;">You get a dedicated counselor. Not a chatbot, not a call center — a real human who cares.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- CSS for Marquee -->
-    <style>
-        .marquee {
-            white-space: nowrap;
-            animation: marquee 25s linear infinite;
+<!-- ── SERVICES ── -->
+<section class="services-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Our Services</div>
+            <h2 class="section-title">Complete Study Abroad<br>Solutions</h2>
+        </div>
+        <div class="row g-4">
+            {% set services = [
+                {'icon': 'fas fa-university', 'color': '#3b82f6', 'title': 'University Admissions', 'desc': 'Shortlisting, applications, SOP & LOR editing, offer letter in 48 hours*', 'badge': ''},
+                {'icon': 'fas fa-passport', 'color': '#10b981', 'title': 'Visa Guidance', 'desc': '95%+ success rate. Full documentation, mock interviews, embassy support', 'badge': 'Most Popular'},
+                {'icon': 'fas fa-briefcase', 'color': '#f59e0b', 'title': 'Part-Time Job', 'desc': 'Job within 30 days of arrival. Resume building, employer connections', 'badge': '100% Guaranteed'},
+                {'icon': 'fas fa-rupee-sign', 'color': '#ec4899', 'title': 'Scholarships & Loans', 'desc': 'Up to ₹15 Lakh scholarships. Fast loan approval, no collateral options', 'badge': ''},
+                {'icon': 'fas fa-home', 'color': '#8b5cf6', 'title': 'Accommodation', 'desc': 'Hostel/PG booking, airport pickup, forex card & SIM card support', 'badge': ''},
+                {'icon': 'fas fa-headset', 'color': '#06b6d4', 'title': '24/7 Support', 'desc': 'Dedicated counselor, emergency helpline, regular family updates', 'badge': ''}
+            ] %}
+            {% for svc in services %}
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-card">
+                    {% if svc.badge %}
+                    <span style="position:absolute;top:1rem;right:1rem;background:rgba(245,197,24,0.15);color:var(--gold);border:1px solid rgba(245,197,24,0.3);padding:0.2rem 0.6rem;border-radius:100px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;">{{ svc.badge }}</span>
+                    {% endif %}
+                    <div class="svc-icon" style="background:{{ svc.color }}1a;border:1px solid {{ svc.color }}33;">
+                        <i class="{{ svc.icon }}" style="color:{{ svc.color }};"></i>
+                    </div>
+                    <h5 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">{{ svc.title }}</h5>
+                    <p style="color:rgba(232,236,240,0.55);font-size:0.88rem;line-height:1.7;margin:0;">{{ svc.desc }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="/services" class="btn-gold">View All Services →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Student Stories</div>
+            <h2 class="section-title">1000+ Dreams Achieved</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 reveal">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Got admission to a top UK university with a ₹8 lakh scholarship. FlyEdu handled everything — visa, accommodation, even my part-time job. Best decision ever!"</p>
+                    <div class="reviewer-name">Rahul Sharma</div>
+                    <div class="reviewer-info">Computer Science — University of Coventry, UK 🇬🇧</div>
+                </div>
+            </div>
+            <div class="col-lg-4 reveal">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"MBBS in Russia at half the cost of India. Wajahat sir guided me through everything. My visa was approved in just 3 weeks. Very professional team."</p>
+                    <div class="reviewer-name">Amna Khan</div>
+                    <div class="reviewer-info">MBBS — Kazan Federal University, Russia 🇷🇺</div>
+                </div>
+            </div>
+            <div class="col-lg-4 reveal">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Poland was my dream and FlyEdu made it happen without IELTS! Got a job at a café within 2 weeks. Earning €700/month. Highly recommend FlyEdu!"</p>
+                    <div class="reviewer-name">Priya Verma</div>
+                    <div class="reviewer-info">Business Management — Warsaw University, Poland 🇵🇱</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+    <div class="container position-relative">
+        <div class="reveal">
+            <div class="section-eyebrow mb-3">Start Today</div>
+            <h2 class="section-title mb-3" style="font-size:clamp(2rem,4vw,3.2rem);">Your Dream University<br>Is One Call Away</h2>
+            <p class="section-sub mx-auto mb-5" style="color:rgba(232,236,240,0.55);">
+                Book a free 30-minute consultation with our expert counselors. No fees, no pressure — just honest guidance.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="/contact" class="btn-gold" style="font-size:1.05rem;padding:1rem 2.5rem;">Book Free Consultation</a>
+                <a href="https://wa.me/918191876059" target="_blank" style="background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;border-radius:100px;padding:1rem 2.5rem;text-decoration:none;font-size:1.05rem;transition:all 0.3s;box-shadow:0 8px 30px rgba(37,211,102,0.3);display:inline-block;">
+                    <i class="fab fa-whatsapp me-2"></i>WhatsApp Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Country toggle - hero form
+function heroToggleCountry() {
+    const val = document.getElementById('heroInterest').value;
+    document.getElementById('heroCountryField').style.display = val ? 'block' : 'none';
+    document.querySelectorAll('.tech-opt').forEach(el => el.style.display = val === 'Tech / Engineering / Business' ? '' : 'none');
+    document.querySelectorAll('.mbbs-opt').forEach(el => el.style.display = val === 'MBBS / Medical' ? '' : 'none');
+}
+
+// Animated counters
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '+';
+            let current = 0;
+            const step = target / 60;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = prefix + Math.floor(current) + suffix;
+            }, 25);
+            counterObserver.unobserve(el);
         }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-    </style>
+    });
+}, { threshold: 0.3 });
+counters.forEach(c => counterObserver.observe(c));
+</script>
 {% endblock %}

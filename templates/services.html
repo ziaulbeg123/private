@@ -1,187 +1,397 @@
 {% extends 'base.html' %}
-
 {% block title %}Our Services - FlyEdu Abroad{% endblock %}
 
-{% block content %}
-    <!-- Hero Section -->
-    <section class="text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://gostudyin.com/wp-content/uploads/2025/03/about-hero.png') no-repeat center center/cover;">
-        <div class="container py-5">
-            <h1 class="display-4 fw-bold">Our Comprehensive Services</h1>
-            <p class="lead">End-to-end support for your study abroad journey – from profile building to settling in your dream destination.</p>
-        </div>
-    </section>
+{% block extra_css %}
+<style>
+.services-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+}
+.services-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1800') center/cover no-repeat;
+    opacity: 0.08;
+}
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+.orb-1 { width: 500px; height: 500px; background: rgba(245,197,24,0.07); top: -100px; right: -100px; }
+.orb-2 { width: 350px; height: 350px; background: rgba(0,200,122,0.05); bottom: -50px; left: 5%; }
 
-    <!-- Beautiful Scrolling Marquee Line -->
-    <div class="bg-primary text-warning py-3 overflow-hidden">
-        <div class="marquee text-center fw-bold fs-4">
-            <span>✨ 100% Part-Time Job Assistance Within 1 Month ✨ High Visa Success Rate ✨ Free Profile Evaluation ✨100% Scholarship  ✨ Trusted by 100+ Students ✨ Start Your Journey Today! ✨</span>
+.services-main { padding: 5rem 0; background: var(--navy-mid); }
+
+.svc-expand-card {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.4s ease;
+    height: 100%;
+}
+.svc-expand-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(245,197,24,0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.svc-header {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s;
+    user-select: none;
+}
+.svc-header:hover { filter: brightness(1.08); }
+.svc-header-icon {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1.2rem;
+    background: rgba(255,255,255,0.15);
+}
+.svc-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #fff;
+    margin: 0;
+}
+.svc-header small { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 0.3rem; display: block; }
+.svc-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.svc-toggle-icon {
+    position: absolute;
+    bottom: 1rem; right: 1rem;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    color: white;
+    transition: transform 0.35s;
+}
+.svc-header[aria-expanded="true"] .svc-toggle-icon { transform: rotate(180deg); }
+
+.svc-body {
+    padding: 1.5rem 2rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+.svc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: rgba(232,236,240,0.72);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.svc-item:last-child { border-bottom: none; }
+.svc-item i { color: var(--emerald); margin-top: 2px; flex-shrink: 0; }
+
+.grad-blue   { background: linear-gradient(135deg, #1d4ed8, #0891b2); }
+.grad-green  { background: linear-gradient(135deg, #059669, #047857); }
+.grad-gold   { background: linear-gradient(135deg, #d97706, #b45309); }
+.grad-indigo { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+.grad-rose   { background: linear-gradient(135deg, #be185d, #9f1239); }
+.grad-teal   { background: linear-gradient(135deg, #0f766e, #0284c7); }
+
+.process-section { padding: 5rem 0; background: var(--navy); }
+.process-step { text-align: center; position: relative; padding: 0 1rem; }
+.process-step::after {
+    content: '→';
+    position: absolute;
+    top: 20px; right: -18px;
+    color: rgba(245,197,24,0.3);
+    font-size: 1.4rem;
+}
+.process-step:last-child::after { display: none; }
+.step-num {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245,197,24,0.15), rgba(245,197,24,0.05));
+    border: 1.5px solid rgba(245,197,24,0.3);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+}
+.step-title { color: #fff; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.step-desc { color: rgba(232,236,240,0.45); font-size: 0.82rem; line-height: 1.6; }
+
+.services-cta {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.services-cta::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245,197,24,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+}
+.btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    font-weight: 700;
+    border-radius: 100px;
+    padding: 0.9rem 2.5rem;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(245,197,24,0.3);
+    display: inline-block;
+    text-decoration: none;
+}
+.btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(245,197,24,0.5);
+    color: var(--navy);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="services-hero">
+    <div class="services-hero-bg"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="container py-5 position-relative text-center">
+        <div class="reveal">
+            <div class="section-eyebrow mb-3">What We Offer</div>
+            <h1 class="section-title mb-4" style="font-size:clamp(2.2rem,5vw,3.8rem);">
+                Premium Study Abroad<br>Services
+            </h1>
+            <p style="color:rgba(232,236,240,0.55);font-size:1.1rem;max-width:560px;margin:0 auto 2.5rem;line-height:1.8;">
+                Complete 360° support — from your first application to settling into your new life abroad.
+            </p>
+            <a href="/contact" class="btn-gold" style="font-size:1.05rem;padding:1rem 2.5rem;">
+                Get Free Counseling
+            </a>
         </div>
     </div>
+</section>
 
-    <!-- Services Accordion -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Explore Our Services</h2>
-            <div class="accordion" id="servicesAccordion">
+<!-- SERVICES GRID -->
+<section class="services-main">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">Our Services</div>
+            <h2 class="section-title">Click Any Card to Explore</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
 
-                <!-- University Selection & Application -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service1">
-                            <strong>University Selection & Admission Assistance</strong>
-                        </button>
-                    </h2>
-                    <div id="service1" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p>We help you choose the best universities and courses based on your profile, budget, and career goals.</p>
-                            <ul>
-                                <li>Personalized shortlisting of universities</li>
-                                <li>Application submission to multiple universities</li>
-                                <li>SOP, LOR, and essay editing</li>
-                                <li>Interview preparation</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://www.insidehighered.com/sites/default/files/media/Getty/GettyImages-1362788656.jpg" alt="University Counseling Session" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 1 University Admission -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-blue" data-bs-toggle="collapse" data-bs-target="#svc1" aria-expanded="false">
+                        <div class="svc-header-icon"><i class="fas fa-university"></i></div>
+                        <h4>University Admission</h4>
+                        <small>Application to Offer Letter</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc1" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> Free Profile Evaluation</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> University Shortlisting (Top 300+)</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Application Filing to 8 Universities</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> SOP, LOR & Essay Editing</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Interview Preparation</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Offer Letter in 48 Hours*</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Visa Guidance -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service2">
-                            <strong>Visa Application & Interview Preparation</strong>
-                        </button>
-                    </h2>
-                    <div id="service2" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p>Our experts ensure your visa application is perfect with highest approval chances.</p>
-                            <ul>
-                                <li>Complete visa documentation support</li>
-                                <li>Mock interviews</li>
-                                <li>File preparation & submission guidance</li>
-                                <li>95%+ visa success rate</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://thumbs.dreamstime.com/b/green-visa-approved-stamp-white-paper-background-close-up-image-marking-symbolizing-successful-application-immigration-340424107.jpg" alt="Visa Approved Stamp" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 2 Visa -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-green" data-bs-toggle="collapse" data-bs-target="#svc2" aria-expanded="false">
+                        <div class="svc-badge">Most Popular</div>
+                        <div class="svc-header-icon"><i class="fas fa-passport"></i></div>
+                        <h4>Visa Guidance</h4>
+                        <small>95%+ Visa Success Rate</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc2" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> 95%+ Visa Success Rate</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Full Documentation Support</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Financial Planning & Bank Statements</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Mock Visa Interviews</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Embassy File Submission</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Visa Approved or Money Back*</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Scholarship Assistance -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service3">
-                            <strong>Scholarship & Financial Aid Guidance</strong>
-                        </button>
-                    </h2>
-                    <div id="service3" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p>We help you find and apply for scholarships to reduce your study costs.</p>
-                            <ul>
-                                <li>Scholarship search & eligibility check</li>
-                                <li>Application support</li>
-                                <li>500+ scholarships secured for our students</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/6b713fb8-a8ef-4ca5-9dbc-be4058e67d74.png" alt="Scholarship Certificate" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 3 Part-Time Job -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-gold" data-bs-toggle="collapse" data-bs-target="#svc3" aria-expanded="false">
+                        <div class="svc-badge">100% Guaranteed</div>
+                        <div class="svc-header-icon"><i class="fas fa-briefcase"></i></div>
+                        <h4>Part-Time Job Guarantee</h4>
+                        <small>Job in 30 Days of Arrival</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc3" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> Job within 30 Days of Arrival</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Direct Café / Retail / Campus Jobs</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Resume & CV Building</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Work Permit Guidance</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Average ₹800–1200/hour earnings</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Language Test Preparation -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service4">
-                            <strong>IELTS / TOEFL / PTE Coaching</strong>
-                        </button>
-                    </h2>
-                    <div id="service4" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p>Expert coaching to achieve your required scores.</p>
-                            <ul>
-                                <li>Online & offline classes</li>
-                                <li>Personalized study plan</li>
-                                <li>Mock tests & feedback</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://nicolaacademy.edu.np/public/nicola/blogs/image/20240321-112500715725601.jpg" alt="IELTS Coaching Class" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 4 Europe Special -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-indigo" data-bs-toggle="collapse" data-bs-target="#svc4" aria-expanded="false">
+                        <div class="svc-header-icon"><i class="fas fa-plane-arrival"></i></div>
+                        <h4>Europe Special Package</h4>
+                        <small>Poland • Italy • Germany</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc4" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> Airport Pickup on Arrival</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> SIM Card + Bank Account Setup</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Grocery Shopping Help</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> University Document Submission</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> City Orientation Tour</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> First Month Full Support</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Part-Time Job Assistance (Special Highlight) -->
-                <div class="accordion-item border-primary">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#service5">
-                            <strong>100% Part-Time Job Assistance Within 1 Month</strong>
-                        </button>
-                    </h2>
-                    <div id="service5" class="accordion-collapse collapse show" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p class="fw-bold text-primary">Guaranteed support to find part-time jobs abroad so you can earn while studying!</p>
-                            <ul>
-                                <li>Job search guidance in your study destination</li>
-                                <li>Resume building for local jobs</li>
-                                <li>Connections with employers (cafes, retail, campus jobs)</li>
-                                <li>Help with work permits where required</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://www.gooverseas.com/sites/default/files/image-collections/2018-04-17/Working%20in%20Cafe%20Pixabay.jpeg" alt="Student Working Part-Time Abroad" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 5 Scholarships -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-rose" data-bs-toggle="collapse" data-bs-target="#svc5" aria-expanded="false">
+                        <div class="svc-header-icon"><i class="fas fa-rupee-sign"></i></div>
+                        <h4>Scholarships & Loans</h4>
+                        <small>Up to ₹15 Lakh Scholarship</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc5" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> Up to ₹15 Lakh Scholarship</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Government & Private Scholarships</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Education Loan Assistance</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> No Collateral Loan Options</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pre-Departure & Post-Landing -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service6">
-                            <strong>Pre-Departure Briefing & Accommodation</strong>
-                        </button>
-                    </h2>
-                    <div id="service6" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
-                        <div class="accordion-body">
-                            <p>Complete support before and after you land.</p>
-                            <ul>
-                                <li>Accommodation arrangement</li>
-                                <li>Airport pickup guidance</li>
-                                <li>Cultural orientation</li>
-                                <li>Bank account & SIM card help</li>
-                            </ul>
-                            <div class="text-center mt-3">
-                                <img src="https://eduplanethub.org/wp-content/uploads/2024/05/11-1.jpg" alt="Pre-Departure Briefing" class="img-fluid rounded shadow" style="max-height: 350px;">
-                            </div>
+            <!-- 6 Accommodation -->
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="svc-expand-card">
+                    <div class="svc-header grad-teal" data-bs-toggle="collapse" data-bs-target="#svc6" aria-expanded="false">
+                        <div class="svc-header-icon"><i class="fas fa-home"></i></div>
+                        <h4>Accommodation & Forex</h4>
+                        <small>Hostel / PG / Insurance</small>
+                        <div class="svc-toggle-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div id="svc6" class="collapse">
+                        <div class="svc-body">
+                            <div class="svc-item"><i class="fas fa-check"></i> Hostel / PG Booking</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Airport Pickup</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Forex Card & SIM Card</div>
+                            <div class="svc-item"><i class="fas fa-check"></i> Medical Insurance</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <div class="section-eyebrow">How It Works</div>
+            <h2 class="section-title">Simple 5-Step Process</h2>
+        </div>
+        <div class="row g-4 justify-content-center reveal">
+            <div class="col process-step">
+                <div class="step-num">1</div>
+                <div class="step-title">Free Consultation</div>
+                <div class="step-desc">Talk to our expert counselor</div>
+            </div>
+            <div class="col process-step">
+                <div class="step-num">2</div>
+                <div class="step-title">Profile Evaluation</div>
+                <div class="step-desc">We assess your background</div>
+            </div>
+            <div class="col process-step">
+                <div class="step-num">3</div>
+                <div class="step-title">University Selection</div>
+                <div class="step-desc">Best universities shortlisted</div>
+            </div>
+            <div class="col process-step">
+                <div class="step-num">4</div>
+                <div class="step-title">Visa & Documents</div>
+                <div class="step-desc">We handle everything</div>
+            </div>
+            <div class="col process-step">
+                <div class="step-num">5</div>
+                <div class="step-title">Fly & Settle ✈️</div>
+                <div class="step-desc">Job guaranteed in 30 days</div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Call to Action -->
-    <section class="py-5 text-center bg-primary text-white">
-        <div class="container">
-            <h2>Ready to Start Your Study Abroad Journey?</h2>
-            <p class="lead">Get your free consultation today!</p>
-            <a href="/contact" class="btn btn-light btn-lg">Contact Us Now</a>
+<!-- CTA -->
+<section class="services-cta">
+    <div class="container position-relative reveal">
+        <div class="section-eyebrow mb-3">Ready to Start?</div>
+        <h2 class="section-title mb-3">Book Your Free Consultation</h2>
+        <p style="color:rgba(232,236,240,0.5);max-width:480px;margin:0 auto 2.5rem;line-height:1.8;">
+            Join 1000+ students who trusted FlyEdu Abroad to turn their international dream into reality.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="/contact" class="btn-gold" style="font-size:1.05rem;padding:1rem 2.5rem;">
+                Book Free Consultation
+            </a>
+            <a href="https://wa.me/918191876059" target="_blank"
+               style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;padding:1rem 2.2rem;border-radius:100px;text-decoration:none;font-size:1.05rem;box-shadow:0 8px 30px rgba(37,211,102,0.3);">
+                <i class="fab fa-whatsapp fa-lg"></i> WhatsApp Us
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CSS for Marquee (add this in base.html or style.css) -->
-    <style>
-        .marquee {
-            white-space: nowrap;
-            animation: marquee 30s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-    </style>
 {% endblock %}

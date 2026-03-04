@@ -1,219 +1,282 @@
 {% extends 'base.html' %}
-
 {% block title %}Contact Us - FlyEdu Abroad{% endblock %}
 
+{% block extra_css %}
+<style>
+.contact-hero {
+    padding: 5rem 0 3rem;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.form-section { padding: 4rem 0; background: var(--navy-mid); }
+
+.form-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+}
+.form-group { margin-bottom: 1.2rem; }
+.form-label-sm {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(232,236,240,0.45);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.form-field {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: #e8ecf0;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+.form-field:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(245,197,24,0.04);
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.1);
+    color: #fff;
+}
+.form-field::placeholder { color: rgba(232,236,240,0.3); }
+.form-field option { background: #0a1628; }
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(0,200,122,0.3);
+}
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,200,122,0.5); }
+
+/* Info sidebar */
+.info-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.2rem;
+}
+.info-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+/* Success Banner */
+.success-banner {
+    background: linear-gradient(135deg, rgba(0,200,122,0.12), rgba(0,160,98,0.08));
+    border: 1px solid rgba(0,200,122,0.3);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.6s ease;
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-    <!-- Hero Section -->
-    <section class="text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.squarespace-cdn.com/content/v1/64c8225592661527b72d0018/e97dffbe-9a34-4aab-97e0-7a80bd3fec3d/hero-edu-consulting.jpeg') no-repeat center center/cover;">
-        <div class="container py-5">
-            <h1 class="display-4 fw-bold">Get Your Free Consultation Today!</h1>
-            <p class="lead">Take the first step towards studying abroad. Our experts are here to guide you personally.</p>
-            <a href="#contact-form" class="btn btn-light btn-lg">Start Now</a>
-        </div>
-    </section>
 
-    <!-- Main Contact Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <!-- Contact Form -->
-                <div class="col-lg-8" id="contact-form">
-                    <h2 class="mb-4">Send Us a Message</h2>
-                    <form method="POST">
-                        <!-- Title + First + Last Name -->
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="title" class="form-label">Title</label>
-                                <select class="form-select" id="title" name="title" required>
-                                    <option value="">Select</option>
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Ms">Ms</option>
-                                    <option value="Miss">Miss</option>
-                                    <option value="Dr">Dr</option>
+<section class="contact-hero">
+    <div class="container position-relative">
+        <div class="section-eyebrow mb-2">Get In Touch</div>
+        <h1 class="section-title mb-3">Expert Guidance<br>in 5 Minutes</h1>
+        <p style="color:rgba(232,236,240,0.5);font-size:1rem;margin-bottom:2rem;">
+            1000+ students placed &bull; 95%+ visa success &bull; Free consultation
+        </p>
+        <a href="https://wa.me/918191876059" target="_blank"
+           style="display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-weight:700;padding:0.8rem 2rem;border-radius:100px;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,0.4);transition:all 0.3s;">
+            <i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp
+        </a>
+    </div>
+</section>
+
+<section class="form-section">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+
+            <!-- FORM -->
+            <div class="col-lg-7">
+                <!-- Success Banner -->
+                {% if submitted %}
+                <div class="success-banner">
+                    <div style="font-size:2rem;">🎉</div>
+                    <div>
+                        <div style="font-weight:700;color:#00c87a;font-size:1.05rem;">Form submitted successfully!</div>
+                        <div style="color:rgba(232,236,240,0.6);font-size:0.9rem;margin-top:0.2rem;">Our counselor will call you back within 5 minutes.</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="form-card">
+                    <h3 style="font-family:'Playfair Display',serif;font-weight:800;color:#fff;margin-bottom:0.3rem;">Fill Your Details</h3>
+                    <p style="color:rgba(232,236,240,0.4);font-size:0.88rem;margin-bottom:2rem;">We'll call you back in 5 minutes ⚡</p>
+
+                    <form method="POST" action="/contact">
+                        <div class="row g-3">
+                            <div class="col-md-6 form-group">
+                                <label class="form-label-sm">First Name</label>
+                                <input type="text" class="form-field" name="first_name" placeholder="First name" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-label-sm">Last Name</label>
+                                <input type="text" class="form-field" name="last_name" placeholder="Last name" required>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label class="form-label-sm">Phone Number</label>
+                                <input type="tel" class="form-field" name="phone" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label class="form-label-sm">Email Address</label>
+                                <input type="email" class="form-field" name="email" placeholder="you@email.com" required>
+                            </div>
+                            <div class="col-12 form-group">
+                                <label class="form-label-sm">Interested In</label>
+                                <select class="form-field" name="interest" id="contactInterest" onchange="contactToggleCountry()" required>
+                                    <option value="">Select your field of study</option>
+                                    <option value="Tech / Engineering / Business">Tech / Engineering / Business</option>
+                                    <option value="MBBS / Medical">MBBS / Medical</option>
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="first_name" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="first_name" name="first_name" required>
-                            </div>
-                            <div class="col-md-5 mb-3">
-                                <label for="last_name" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name" required>
-                            </div>
-                        </div>
-
-                        <!-- Phone with Searchable Country Code -->
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label for="country_code" class="form-label">Country Code</label>
-                                <select id="country_code" name="country_code" required></select>
-                            </div>
-                            <div class="col-md-8">
-                                <label for="phone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="e.g. 3001234567" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-
-                        <!-- Preferred Country with Other option -->
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="country" class="form-label">Preferred Study Destination</label>
-                                <select class="form-select" id="country" name="country" onchange="toggleOtherCountry()">
-                                    <option value="">Select Country</option>
-                                    <option>USA</option>
-                                    <option>UK</option>
-                                    <option>Canada</option>
-                                    <option>Australia</option>
-                                    <option>Germany</option>
-                                    <option>Ireland</option>
-                                    <option>New Zealand</option>
-                                    <option>Poland</option>
-                                    <option>Italy</option>
-                                    <option>Other</option>
+                            <div class="col-12 form-group" id="contactCountryField" style="display:none;">
+                                <label class="form-label-sm">Preferred Country</label>
+                                <select class="form-field" name="country">
+                                    <option value="">Select country</option>
+                                    <option class="tech-opt">UK</option>
+                                    <option class="tech-opt">Canada</option>
+                                    <option class="tech-opt">Germany</option>
+                                    <option class="tech-opt">Poland</option>
+                                    <option class="tech-opt">Italy</option>
+                                    <option class="tech-opt">Australia</option>
+                                    <option class="tech-opt">Dubai</option>
+                                    <option class="mbbs-opt">Russia</option>
+                                    <option class="mbbs-opt">Georgia</option>
+                                    <option class="mbbs-opt">Kazakhstan</option>
+                                    <option class="mbbs-opt">Kyrgyzstan</option>
+                                    <option class="mbbs-opt">China</option>
+                                    <option class="mbbs-opt">Philippines</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3" id="other_country_div" style="display:none;">
-                                <label for="other_country" class="form-label">Specify Other Country</label>
-                                <input type="text" class="form-control" id="other_country" name="other_country" placeholder="Enter country name">
+                            <div class="col-12 form-group">
+                                <label class="form-label-sm">Your Query (Optional)</label>
+                                <textarea class="form-field" name="message" rows="3" placeholder="Tell us about your situation, goals, or any questions..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-bolt me-2"></i> Get Free Call Back Now
+                                </button>
+                                <p style="text-align:center;font-size:0.78rem;color:rgba(232,236,240,0.3);margin-top:0.8rem;">
+                                    <i class="fas fa-shield-alt me-1"></i> 100% Free & Confidential. No spam, ever.
+                                </p>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="level" class="form-label">Level of Study</label>
-                                <select class="form-select" id="level" name="level">
-                                    <option value="">Select Level</option>
-                                    <option>Undergraduate</option>
-                                    <option>Master's</option>
-                                    <option>PhD</option>
-                                    <option>Diploma/Certificate</option>
-                                    <option>Language Course</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="message" class="form-label">Your Message / Queries</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                        </div>
-
-                        <!-- Attractive Submit Button -->
-                        <button type="submit" class="btn btn-success btn-lg px-5 py-3 shadow-lg fw-bold">
-                            <i class="fas fa-paper-plane me-2"></i> Send Your Inquiry Now
-                        </button>
                     </form>
                 </div>
+            </div>
 
-                <!-- Contact Info Sidebar -->
-                <div class="col-lg-4">
-                    <h2 class="mb-4">Contact Information</h2>
-                    <div class="card border-0 shadow p-4 mb-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <i class="fas fa-phone fa-2x me-3 text-primary"></i>
-                            <div>
-                                <strong>Phone / WhatsApp</strong><br>
-                                +91 8191876059
-                                +91 9760415452
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <i class="fas fa-envelope fa-2x me-3 text-primary"></i>
-                            <div>
-                                <strong>Email</strong><br>
-                                wajahatmirza@flyeduabroad.com
-                                ziaulbeg@flyeduabroad.com
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <i class="fas fa-clock fa-2x me-3 text-primary"></i>
-                            <div>
-                                <strong>Availability</strong><br>
-                                Online Worldwide(IST)<br>
-                                Mon - Sat: 10 AM - 7 PM
-                            </div>
+            <!-- SIDEBAR -->
+            <div class="col-lg-5">
+                <div style="position:sticky;top:100px;">
+                    <h4 style="font-family:'Playfair Display',serif;color:#fff;font-weight:800;margin-bottom:1.5rem;">Reach Us Directly</h4>
+
+                    <div class="info-card">
+                        <div class="info-icon" style="background:rgba(37,211,102,0.1);">📱</div>
+                        <h6 style="color:#fff;font-weight:700;margin-bottom:0.3rem;">WhatsApp (Fastest)</h6>
+                        <a href="https://wa.me/919760415452" style="color:var(--gold);text-decoration:none;font-weight:600;">+91 97604 15452</a>
+                        <p style="color:rgba(232,236,240,0.4);font-size:0.82rem;margin-top:0.3rem;">Usually responds in &lt; 2 minutes</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon" style="background:rgba(245,197,24,0.1);">🕐</div>
+                        <h6 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">Office Hours</h6>
+                        <div style="color:rgba(232,236,240,0.6);font-size:0.9rem;line-height:1.8;">
+                            Mon – Sat: 9:00 AM – 7:00 PM<br>
+                            Sunday: 10:00 AM – 4:00 PM
                         </div>
                     </div>
 
-                    <!-- WhatsApp Button -->
-                    <a href="https://wa.me/918191876059?text=Hello!%20I%20want%20to%20know%20about%20studying%20abroad." target="_blank" class="btn btn-success btn-lg w-100 mb-4">
-                        <i class="fab fa-whatsapp fa-2x me-2"></i> Chat on WhatsApp
-                    </a>
+                    <div class="info-card">
+                        <div class="info-icon" style="background:rgba(59,130,246,0.1);">🌍</div>
+                        <h6 style="color:#fff;font-weight:700;margin-bottom:0.5rem;">We Specialize In</h6>
+                        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;">
+                            {% for country in ['🇬🇧 UK', '🇨🇦 Canada', '🇩🇪 Germany', '🇵🇱 Poland', '🇮🇹 Italy', '🇦🇺 Australia', '🏥 MBBS'] %}
+                            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(232,236,240,0.7);padding:0.3rem 0.7rem;border-radius:100px;font-size:0.8rem;">{{ country }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
 
-                    <!-- Trust Badges -->
-                    <div class="text-center bg-white p-4 rounded shadow">
-                        <p class="fw-bold mb-3">Why Contact Us?</p>
-                        <ul class="list-unstyled text-start">
-                            <li><i class="fas fa-check text-success me-2"></i> Free Profile Evaluation</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Quick Response in 24 Hours</li>
-                            <li><i class="fas fa-check text-success me-2"></i> 1000+ Students Guided</li>
-                            <li><i class="fas fa-check text-success me-2"></i> No Hidden Charges</li>
-                        </ul>
+                    <!-- Quick Stats -->
+                    <div style="background:linear-gradient(135deg,rgba(245,197,24,0.08),rgba(245,197,24,0.03));border:1px solid rgba(245,197,24,0.15);border-radius:20px;padding:1.5rem;">
+                        <h6 style="color:var(--gold);font-weight:700;margin-bottom:1rem;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;">Why Students Trust Us</h6>
+                        <div style="display:flex;flex-direction:column;gap:0.8rem;">
+                            {% set points = ['95%+ Visa Success Rate', '1000+ Students Placed', 'Part-Time Job in 30 Days', 'Free Profile Evaluation', '₹50Cr+ Scholarships Won'] %}
+                            {% for point in points %}
+                            <div style="display:flex;align-items:center;gap:0.7rem;color:rgba(232,236,240,0.7);font-size:0.88rem;">
+                                <i class="fas fa-check-circle" style="color:var(--emerald);"></i> {{ point }}
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Student Images Section -->
-    <section class="py-5">
-        <div class="container text-center">
-            <h2>Start Your Journey with Confidence</h2>
-            <div class="row mt-4">
-                <div class="col-md-6 mb-4">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E12AQHQrhFdpI7iag/article-cover_image-shrink_720_1280/B4EZfosbnGGcAI-/0/1751955651638?e=2147483647&v=beta&t=36btd-NYuXdJUSuvnngxUZc1_a0glX1rCKWTYR1m65Q" alt="Happy International Students" class="img-fluid rounded shadow">
-                </div>
-                <div class="col-md-6 mb-4">
-                    <img src="https://s3-us-west-2.amazonaws.com/issuewireassets/primg/175789/study-abroad-consultant-guiding-student1733521204.png" alt="Professional Consultation" class="img-fluid rounded shadow">
-                </div>
-            </div>
-        </div>
-    </section>
+{% endblock %}
 
-    <!-- JavaScript for functionality -->
-    <script>
-        // Show/Hide Other Country field
-        function toggleOtherCountry() {
-            const countrySelect = document.getElementById('country');
-            const otherDiv = document.getElementById('other_country_div');
-            if (countrySelect.value === 'Other') {
-                otherDiv.style.display = 'block';
-            } else {
-                otherDiv.style.display = 'none';
-                document.getElementById('other_country').value = '';
-            }
-        }
+{% block extra_js %}
+<script>
+function contactToggleCountry() {
+    const val = document.getElementById('contactInterest').value;
+    document.getElementById('contactCountryField').style.display = val ? 'block' : 'none';
+    document.querySelectorAll('.tech-opt').forEach(el => el.style.display = val === 'Tech / Engineering / Business' ? '' : 'none');
+    document.querySelectorAll('.mbbs-opt').forEach(el => el.style.display = val === 'MBBS / Medical' ? '' : 'none');
+}
 
-        // Tom Select for searchable country codes
-        new TomSelect('#country_code', {
-            maxOptions: 250,
-            valueField: 'code',
-            labelField: 'name',
-            searchField: ['name', 'code'],
-            placeholder: 'Search country or code...',
-            options: [
-                {name: 'Pakistan (+92)', code: '+92'},
-                {name: 'India (+91)', code: '+91'},
-                {name: 'United States (+1)', code: '+1'},
-                {name: 'United Kingdom (+44)', code: '+44'},
-                {name: 'Canada (+1)', code: '+1'},
-                {name: 'Australia (+61)', code: '+61'},
-                {name: 'Germany (+49)', code: '+49'},
-                {name: 'UAE (+971)', code: '+971'},
-                {name: 'Saudi Arabia (+966)', code: '+966'},
-                {name: 'Italy (+39)', code: '+39'},
-                {name: 'Poland (+48)', code: '+48'},
-                {name: 'France (+33)', code: '+33'},
-                {name: 'Turkey (+90)', code: '+90'},
-                {name: 'Bangladesh (+880)', code: '+880'},
-                // Add more if needed
-            ],
-            create: false
-        });
-    </script>
+// Show toast on submission
+{% if submitted %}
+setTimeout(() => {
+    const toast = document.getElementById('successToast');
+    if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 6000);
+    }
+}, 300);
+{% endif %}
+</script>
 {% endblock %}
